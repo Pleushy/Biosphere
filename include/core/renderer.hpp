@@ -1,23 +1,10 @@
 #pragma once
 
-#include <queue>
+#include <core/frame.hpp>
 
-// Pixel data structure
-struct Pixel {
-    char ch;                            // Char to display
-    int color;                          // ANSI color code
-};
-
-// Frame data structure
-struct Frame {
-    int width;                          // Width of frame
-    int height;                         // Height of frame
-    std::queue<Pixel> pixels;           // Pixel queue
-};
-
+// Basic renderer class (might get more complicated in the future)
 class Renderer {
-    private:
-        void clear_frame(void);         // Clears frame
     public:
-        void render_frame(Frame);       // Renders next frame
+        void clear_frame(void);     // Clears current frame
+        void render_frame(Frame);   // Renders next frame
 };
