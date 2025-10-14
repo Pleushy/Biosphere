@@ -12,11 +12,11 @@ void heartbeat(const int interval) {
         std::queue<Frame> frames;
         
         
-        frames.push(create_square(32, 16, 2, 'O', 4));
+        frames.push(create_rect(32, 16, 2, 'O', 4));
 
-        frames.push(create_square(64, 32, 1, '#', 6));
+        frames.push(create_rect(64, 32, 1, '#', 6));
         
-        frames.push(create_square(128, 64, 0, '.', 7));
+        frames.push(create_rect(128, 64, 0, '.', 7));
         
         Frame final_frame = combine_frames(frames); 
 
