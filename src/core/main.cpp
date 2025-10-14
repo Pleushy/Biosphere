@@ -1,4 +1,5 @@
 #include "core/renderer.hpp"
+#include "core/frame.hpp"
 #include "utils/globals.hpp"
 #include <unistd.h>
 #include <queue>
@@ -6,16 +7,20 @@
 Renderer renderer;
 bool running = true;
 
-void heartbeat(int interval) {
-    int i = 0;
+void heartbeat(const int interval) {
     while (running) {
-        i++;
-        std::queue<Pixel> pixels{};
-        for (int j = 0; j < 256*64; j++) {
-            pixels.push(Pixel('#', (i+j)%256));
-        }
-        Frame my_frame{256, 64, pixels};
-        renderer.render_frame(my_frame);
+        std::queue<Frame> frames;
+        
+        
+        frames.push(create_square(32, 16, 2, 'O', 4));
+
+        frames.push(create_square(64, 32, 1, '#', 6));
+        
+        frames.push(create_square(128, 64, 0, '.', 7));
+        
+        Frame final_frame = combine_frames(frames); 
+
+        renderer.render_frame(final_frame);
         usleep(interval);
     }
 }
