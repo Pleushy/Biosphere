@@ -1,6 +1,9 @@
 #pragma once
 
 #include <queue>
+#include <optional>
+#include <string>
+#include "utils/vec2.hpp"
 
 // Pixel data structure
 struct Pixel {
@@ -11,17 +14,26 @@ struct Pixel {
 
 // Frame data structure
 struct Frame {
-    int width;                  // Width of frame
-    int height;                 // Height of frame
-    int zindex;                 // Z-index of frame (layering)
+    Vec2 size;                  // Absolute size of frame
+    Vec2 position;              // Absolute position of frame (from top left)
+    int zindex;                 // Layering index of frame
     std::queue<Pixel> pixels;   // Pixels
 };
 
-// Checks whether the frame is a valid frame
-bool is_frame_valid(Frame);
+// Namespace for frame functions
+namespace frame {
+    // Checks whether the frame is a valid frame
+    bool is_valid(Frame frame);
 
-// Combines multiple frames into one
-Frame combine_frames(std::queue<Frame>);
+    // Attempts to combine multiple frames into one
+    std::optional<Frame> combine(std::queue<Frame> frame_queue);
+}
 
-// Creates a rectangular frame
-Frame create_rect(int width, int height, int zindex, char ch, int color);
+// Namespace for draw functions
+namespace draw {
+    // Creates a blank frame
+    Frame blank(Vec2 size);
+
+    // Creates a rectangular frame
+    Frame rect(Vec2 size, Vec2 position, int zindex, char ch, int color);
+}
