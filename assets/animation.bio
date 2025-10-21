@@ -1,0 +1,44 @@
+; set variables
+set multi 4
+
+; set parameters
+resize multi
+move 0
+zindex 0
+
+; set more variables
+set size multi
+mul size multi
+
+; frame 1
+draw size # 15
+queue
+
+; frame 2
+sub size multi
+draw size @ 8
+queue
+
+; frame 3
+sub size multi
+draw size $ 4
+queue
+
+; frame 4
+sub size multi
+draw size ! 2
+queue
+
+; frame 5
+add size multi
+draw size $ 4
+queue
+
+; frame 6
+add size multi
+draw size @ 8
+queue
+
+; free variables
+free multi
+free size
