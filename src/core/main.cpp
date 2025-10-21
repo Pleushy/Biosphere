@@ -1,26 +1,24 @@
 #include "core/renderer.hpp"
 #include "core/frame.hpp"
 #include "utils/globals.hpp"
+#include "utils/bio.hpp"
 #include <unistd.h>
 #include <queue>
+#include <optional>
 
+Bio bio;
 Renderer renderer;
 bool running = true;
 
 void heartbeat(const int interval) {
     while (running) {
-        std::queue<Frame> frames;
-        
-        
-        frames.push(create_rect(32, 16, 2, 'O', 4));
+        std::optional<std::queue<Frame>> final_frames = bio.execute("assets/animation.bio");
 
-        frames.push(create_rect(64, 32, 1, '#', 6));
-        
-        frames.push(create_rect(128, 64, 0, '.', 7));
-        
-        Frame final_frame = combine_frames(frames); 
+        if (final_frames.has_value()) {
+            renderer.add_animation(final_frames.value());
+        }
 
-        renderer.render_frame(final_frame);
+        renderer.update();
         usleep(interval);
     }
 }
