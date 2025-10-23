@@ -3,8 +3,8 @@ set multi 4
 
 ; set parameters
 resize multi
-move 0
-zindex 0
+move 1 4
+zindex 1
 
 ; set more variables
 set size multi
