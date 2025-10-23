@@ -1,0 +1,33 @@
+resize 4
+move 4
+zindex 0
+
+draw 4 + 32
+skip 1
+draw 4 - 32
+queue
+
+draw 4 + 32
+skip 1
+draw 4 - 32
+queue
+
+draw 4 + 2
+skip 1
+draw 4 - 2
+queue
+
+draw 4 + 2
+skip 1
+draw 4 - 2
+queue
+
+draw 4 + 32
+skip 1
+draw 4 - 32
+queue
+
+draw 4 + 32
+skip 1
+draw 4 - 32
+queue
