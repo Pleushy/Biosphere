@@ -2,7 +2,6 @@
 
 #include <queue>
 #include <optional>
-#include <string>
 #include "utils/vec2.hpp"
 
 // Pixel data structure
@@ -20,13 +19,22 @@ struct Frame {
     std::queue<Pixel> pixels;   // Pixels
 };
 
+// Animation type definition
+typedef std::queue<Frame> Animation;
+
 // Namespace for frame functions
 namespace frame {
     // Checks whether the frame is a valid frame
     bool is_valid(Frame frame);
 
     // Attempts to combine multiple frames into one
-    std::optional<Frame> combine(std::queue<Frame> frame_queue);
+    std::optional<Frame> combine(std::vector<Frame> frames, int zindex);
+
+    // Attempts to combine multiple animations into one
+    std::optional<Animation> combine_animations(std::vector<Animation> animations, int zindex);
+
+    // Attempts to combine multiple animations and multiple frames into one
+    std::optional<Animation> combine_animations_and_frames(std::vector<Frame> frames, std::vector<Animation> animations, int frame_zindex, int animation_zindex, int final_zindex);
 }
 
 // Namespace for draw functions
